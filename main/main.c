@@ -113,6 +113,10 @@ static void guiTask(void *pvParameter) {
     disp_drv.set_px_cb = disp_driver_set_px;
 #endif
 
+    // need to set resolution for LVGL 8x
+    disp_drv.hor_res = CONFIG_LV_HOR_RES_MAX;
+    disp_drv.ver_res = CONFIG_LV_VER_RES_MAX;
+
     disp_drv.draw_buf = &disp_buf;
     lv_disp_drv_register(&disp_drv);
 
