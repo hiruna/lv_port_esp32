@@ -21,27 +21,13 @@
 #include "driver/gpio.h"
 #include "esp_timer.h"
 
-/* Littlevgl specific */
-#ifdef LV_LVGL_H_INCLUDE_SIMPLE
 #include "lvgl.h"
-#else
-#include "lvgl/lvgl.h"
-#endif
 
 #include "lvgl_helpers.h"
 
-#ifndef CONFIG_LV_TFT_DISPLAY_MONOCHROME
-    #if defined CONFIG_LV_USE_DEMO_WIDGETS
-        #include "lv_examples/src/lv_demo_widgets/lv_demo_widgets.h"
-    #elif defined CONFIG_LV_USE_DEMO_KEYPAD_AND_ENCODER
-        #include "lv_examples/src/lv_demo_keypad_encoder/lv_demo_keypad_encoder.h"
-    #elif defined CONFIG_LV_USE_DEMO_BENCHMARK
-        #include "lv_examples/src/lv_demo_benchmark/lv_demo_benchmark.h"
-    #elif defined CONFIG_LV_USE_DEMO_STRESS
-        #include "lv_examples/src/lv_demo_stress/lv_demo_stress.h"
-    #else
-        #error "No demo application selected."
-    #endif
+#ifdef CONFIG_LV_USE_DEMO_WIDGETS
+#define LV_MEM_SIZE    (38ul * 1024ul)
+#include "lv_demos.h"
 #endif
 
 /*********************
@@ -182,7 +168,7 @@ static void create_demo_application(void)
     lv_obj_t * scr = lv_disp_get_scr_act(NULL);
 
     /*Create a Label on the currently active screen*/
-    lv_obj_t * label1 =  lv_label_create(scr, NULL);
+    lv_obj_t * label1 =  lv_label_create(scr);
 
     /*Modify the Label's text*/
     lv_label_set_text(label1, "Hello\nworld");
@@ -190,7 +176,7 @@ static void create_demo_application(void)
     /* Align the Label to the center
      * NULL means align on parent (which is the screen now)
      * 0, 0 at the end means an x, y offset after alignment*/
-    lv_obj_align(label1, NULL, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_align(label1, LV_ALIGN_CENTER, 0, 0);
 #else
     /* Otherwise we show the selected demo */
 
