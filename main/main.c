@@ -26,7 +26,6 @@
 #include "lvgl_helpers.h"
 
 #ifdef CONFIG_LV_USE_DEMO_WIDGETS
-#define LV_MEM_SIZE    (38ul * 1024ul)
 #include "lv_demos.h"
 #endif
 
