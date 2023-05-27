@@ -1,10 +1,8 @@
-[submodule "lv_examples"]
-	path = components/lv_examples/lv_examples
-	url = https://github.com/littlevgl/lv_examples.git
-	branch = release/v7
 [submodule "components/lvgl_esp32_drivers"]
 	path = components/lvgl_esp32_drivers
-	url = https://github.com/lvgl/lvgl_esp32_drivers.git
+	url = https://github.com/hiruna/lvgl_esp32_drivers.git
+	branch = develop/lvgl_8.3.7_idf_5.2
 [submodule "components/lvgl"]
 	path = components/lvgl
 	url = https://github.com/lvgl/lvgl.git
+	branch = 2b56e04205481daa6575bd5f7ab5df59d11676eb
