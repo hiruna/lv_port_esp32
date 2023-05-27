@@ -25,8 +25,16 @@
 
 #include "lvgl_helpers.h"
 
-#ifdef CONFIG_LV_USE_DEMO_WIDGETS
+#if defined CONFIG_LV_USE_DEMO_WIDGETS
 #include "lv_demos.h"
+#elif defined CONFIG_LV_USE_DEMO_KEYPAD_AND_ENCODER
+#include "lvgl/demos/keypad_encoder/lv_demo_keypad_encoder.h"
+#elif defined CONFIG_LV_USE_DEMO_BENCHMARK
+#include "lvgl/demos/benchmark/lv_demo_benchmark.h"
+#elif defined CONFIG_LV_USE_DEMO_STRESS
+#include "lvgl/demos/stress/lv_demo_stress.h"
+#elif defined CONFIG_LV_USE_DEMO_MUSIC
+#include "lvgl/demos/music/lv_demo_music.h"
 #endif
 
 /*********************
@@ -163,8 +171,7 @@ static void create_demo_application(void)
 {
     /* When using a monochrome display we only show "Hello World" centered on the
      * screen */
-#if defined CONFIG_LV_TFT_DISPLAY_MONOCHROME || \
-    defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7735S
+#if defined CONFIG_LV_TFT_DISPLAY_MONOCHROME
 
     /* use a pretty small demo for monochrome displays */
     /* Get the current screen  */
@@ -182,7 +189,6 @@ static void create_demo_application(void)
     lv_obj_align(label1, LV_ALIGN_CENTER, 0, 0);
 #else
     /* Otherwise we show the selected demo */
-
     #if defined CONFIG_LV_USE_DEMO_WIDGETS
         lv_demo_widgets();
     #elif defined CONFIG_LV_USE_DEMO_KEYPAD_AND_ENCODER
@@ -191,6 +197,8 @@ static void create_demo_application(void)
         lv_demo_benchmark();
     #elif defined CONFIG_LV_USE_DEMO_STRESS
         lv_demo_stress();
+    #elif defined CONFIG_LV_USE_DEMO_MUSIC
+        lv_demo_music();
     #else
         #error "No demo application selected."
     #endif
