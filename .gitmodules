@@ -5,4 +5,3 @@
 [submodule "components/lvgl"]
 	path = components/lvgl
 	url = https://github.com/lvgl/lvgl.git
-	branch = 2b56e04205481daa6575bd5f7ab5df59d11676eb
