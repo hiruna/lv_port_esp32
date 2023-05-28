@@ -37,6 +37,10 @@
 #include "lvgl/demos/music/lv_demo_music.h"
 #endif
 
+// GC9A01 - 1.28" 240x240 ROUND LCD DISPLAY MODULE
+#if defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_GC9A01 && LV_BUILD_EXAMPLES
+#include "widgets/lv_example_widgets.h"
+#endif
 /*********************
  *      DEFINES
  *********************/
@@ -169,9 +173,13 @@ static void guiTask(void *pvParameter) {
 
 static void create_demo_application(void)
 {
+
+    // GC9A01 - 1.28" 240x240 ROUND LCD DISPLAY MODULE
+#if defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_GC9A01 && LV_BUILD_EXAMPLES
+    lv_example_meter_3();
+#elif defined CONFIG_LV_TFT_DISPLAY_MONOCHROME
     /* When using a monochrome display we only show "Hello World" centered on the
      * screen */
-#if defined CONFIG_LV_TFT_DISPLAY_MONOCHROME
 
     /* use a pretty small demo for monochrome displays */
     /* Get the current screen  */
