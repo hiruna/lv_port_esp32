@@ -122,6 +122,8 @@ static void guiTask(void *pvParameter) {
 #ifdef CONFIG_LV_TFT_DISPLAY_MONOCHROME
     disp_drv.rounder_cb = disp_driver_rounder;
     disp_drv.set_px_cb = disp_driver_set_px;
+    // disable antialiasing when using monochrome display
+    disp_drv.antialiasing = 0;
 #endif
 
     // need to set resolution for LVGL 8x
