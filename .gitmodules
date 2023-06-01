@@ -6,3 +6,7 @@
 	path = components/lvgl
 	url = https://github.com/lvgl/lvgl.git
 	branch = release/v8.3
+[submodule "components/lvgl_touch_calibration"]
+	path = components/lvgl_touch_calibration
+	url = https://github.com/hiruna/lvgl_touch_calibration.git
+	branch = feature/idf_component
