@@ -138,10 +138,12 @@ static void lv_tick_task(void *arg) {
 
 // callback function when touch calibration is complete
 void lv_tc_finish_cb(lv_event_t *event) {
-    lv_obj_t *tCScreen = (lv_obj_t*)(event->user_data);
+    lv_obj_t *originalScreen = (lv_obj_t*)(event->user_data);
+    lv_obj_t *tCScreen = lv_scr_act();
     if (event->code == LV_EVENT_READY) {
-        lv_obj_del(tCScreen);
+        lv_disp_load_scr(originalScreen);
         create_demo_application();
+        lv_obj_del(tCScreen);
     } else {
         ESP_LOGE(TAG, "unexpected lv event code '%d' (expected '%d') after touch calibration", lv_event_get_code(event),
                  LV_EVENT_READY);
@@ -150,8 +152,9 @@ void lv_tc_finish_cb(lv_event_t *event) {
 
 // function to create the touch calibration screen and begin the calibration
 static void start_touch_calibration() {
+    lv_obj_t *activeScreen = lv_scr_act();
     lv_obj_t *tCScreen = lv_tc_screen_create();
-    lv_obj_add_event_cb(tCScreen, lv_tc_finish_cb, LV_EVENT_READY, &tCScreen);
+    lv_obj_add_event_cb(tCScreen, lv_tc_finish_cb, LV_EVENT_READY, activeScreen);
     lv_disp_load_scr(tCScreen);
     lv_tc_screen_start(tCScreen);
 }
@@ -248,6 +251,7 @@ static void guiTask(void *pvParameter) {
 
     /* Create the demo application */
 #if CONFIG_LV_TOUCH_CONTROLLER != TOUCH_CONTROLLER_NONE && CONFIG_USE_CUSTOM_LV_TC_COEFFICIENTS == 0
+    esp_nvs_tc_coeff_erase();
     if (esp_nvs_tc_coeff_init()) {
         create_demo_application();
     } else {
