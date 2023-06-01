@@ -250,13 +250,18 @@ static void guiTask(void *pvParameter) {
     ESP_ERROR_CHECK(esp_timer_start_periodic(periodic_timer, LV_TICK_PERIOD_MS * 1000));
 
     /* Create the demo application */
-#if CONFIG_LV_TOUCH_CONTROLLER != TOUCH_CONTROLLER_NONE && CONFIG_USE_CUSTOM_LV_TC_COEFFICIENTS == 0
+#if CONFIG_LV_TOUCH_CONTROLLER != TOUCH_CONTROLLER_NONE
+#if CONFIG_USE_CUSTOM_LV_TC_COEFFICIENTS == 0
     // esp_nvs_tc_coeff_erase(); // this can be used to erase the stored coeff data on nvs
     if (esp_nvs_tc_coeff_init()) {
         create_demo_application();
     } else {
         start_touch_calibration();
     }
+#else
+    lv_tc_load_coeff_from_config();
+    create_demo_application();
+#endif
 #else
     create_demo_application();
 #endif
