@@ -251,7 +251,7 @@ static void guiTask(void *pvParameter) {
 
     /* Create the demo application */
 #if CONFIG_LV_TOUCH_CONTROLLER != TOUCH_CONTROLLER_NONE && CONFIG_USE_CUSTOM_LV_TC_COEFFICIENTS == 0
-    esp_nvs_tc_coeff_erase();
+    // esp_nvs_tc_coeff_erase(); // this can be used to erase the stored coeff data on nvs
     if (esp_nvs_tc_coeff_init()) {
         create_demo_application();
     } else {
