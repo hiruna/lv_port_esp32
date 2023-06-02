@@ -1,11 +1,13 @@
 # LVGL project for ESP32
 
-This is an ESP32 demo project showcasing LVGL v7 with support for several display controllers and touch controllers.
-The demo application is the `lv_demo_widgets` project from the [lv_examples](https://github.com/lvgl/lv_examples) repository.
+NOTE: See https://github.com/lvgl/lvgl_esp32_drivers/issues/222
 
-- Version of ESP-IDF required 4.2. NOTE: We're trying to make this repo backwards compatible, usage of idf.py is encouraged.
-- Version of LVGL used: 7.9.
-- Version of lv_examples used: 7.9.
+This is an ESP32 demo project showcasing LVGL v8.3 [lvgl/demos](https://github.com/lvgl/lvgl/tree/release/v8.3/demos) 
+with support for several display controllers and touch controllers.
+
+- Version of ESP-IDF required 5.2 ([master branch](https://github.com/espressif/esp-idf/tree/master)).
+- Version of LVGL used: [release/v8.3](https://github.com/lvgl/lvgl/tree/release/v8.3).
+- Version of lvgl_esp32_drivers used: https://github.com/hiruna/lvgl_esp32_drivers/tree/develop/lvgl_8.3.7_idf_5.2.
 
 #### Table of content
 - [Get started](#get-started)
@@ -24,7 +26,7 @@ Monochrome support:
 
 ## Display and touch controllers
 
-The display and touch (indev) controllers are now into it's own repository, you can find it [here](https://github.com/lvgl/lvgl_esp32_drivers).
+The display and touch (indev) controllers are now into it's own repository, you can find it [here](https://github.com/hiruna/lvgl_esp32_drivers/tree/develop/lvgl_8.3.7_idf_5.2).
 To report any issue or add new display or touch (indev) drivers you can do so in the `lvgl_esp32_drivers` repo.
 
 ## Get started
@@ -40,7 +42,7 @@ Instructions assume you are using the v4.x toolchain, otherwise use the make com
 
 ### Build and run the demo.
 
-1. Clone this project by `git clone --recurse-submodules https://github.com/lvgl/lv_port_esp32.git`, this will pull this repo and its submodules.
+1. Clone this project by `git clone --recurse-submodules https://github.com/hiruna/lv_port_esp32.git -b develop/lvgl_8.3.7_idf_5.2`, this will pull this repo and its submodules.
 
 2. Get into the created `lv_port_esp32` directory.
 
@@ -69,7 +71,7 @@ From your project's root directory:
 
 ## Use lvgl_esp32_drivers in your project
 
-It is recommended to add [lvgl_esp32_drivers](https://github.com/lvgl/lvgl_esp32_drivers) as a submodule in your IDF project's git repo.
+It is recommended to add [lvgl_esp32_drivers](https://github.com/hiruna/lvgl_esp32_drivers/tree/develop/lvgl_8.3.7_idf_5.2) as a submodule in your IDF project's git repo.
 
 From your project's root directory:
 1. Create a directory named `components` (if you don't have one already) with `mkdir -p components`.
